@@ -1,0 +1,16 @@
+1. Preprocess the data- train and Test---
+
+timeseries data----> Train -120,130,140,150,160,180   test data-->190,200,210,220,230,240,250
+								
+timesteps=3
+   Xtrain      y_train							X_test      y_test					
+									
+f1   f2   f3   o/p							f1   f2   f3   o/p
+120  130  140  150							190  200  210  220
+130  140  150  160					                200  210  220  230 
+140  150  160  180     							210  220  230  240
+
+
+2. Create an stacked LSTM model
+3. Predict the test data and plot the output
+4.Predict the future 30 days and plot the output
