@@ -1,0 +1,20 @@
+body{
+color:#fff;
+background-color:#FF7F50;}
+.stButton>button {
+    color: #4F8BF9;
+    rectangle: 50%;
+    height: 3em;
+    width: 5em;
+}
+
+.stTextInput>div>div>input {
+    color: #000000;
+}
+.stradio{
+display:inline-flex;
+align-items:center;
+}
+.sttable>table{
+color: #4F8BF9;
+}
