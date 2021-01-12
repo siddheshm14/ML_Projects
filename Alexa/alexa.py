@@ -12,6 +12,9 @@ import datetime
 import requests
 import data_analysis
 import shopping_list
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 #from lsHotword import ls
 
@@ -56,7 +59,7 @@ def take_command():
         with sr.Microphone() as source:
 
             print('listening....')
-            listener.pause_threshold=1
+            #listener.pause_threshold=1
 
 
             voice = listener.listen(source)
@@ -150,12 +153,24 @@ def run_alexa():
     elif  'weather' in command:
         city=command.replace('what is the weather in','')
         weather_details(city)
+
     #### Performing Data Analysis #####
     elif 'data analysis' in command:
-        #type=command.replace('perform classification data analysis','classification')
         test_acc,train_score=data_analysis.classification()
         talk("Performed classification Data analysis using CatBoost classifier and received Test accuracy of  {:.2f} %".format(test_acc*100))
         talk("and train accuracy of {:.2f} % with low variance and bias".format(train_score*100))
+
+    ###Predict diabetes by opening diabetes prediction website ####
+    elif 'diabetes' in command:
+        talk('Searching diabetes prediction website')
+        browser=webdriver.Chrome(ChromeDriverManager().install())
+        browser.get("https://share.streamlit.io/siddheshm14/data-analysis-project/webapi.py")
+
+    elif 'home depot' in command:
+        talk('Searching Home Depot Product recommendation website')
+        browser=webdriver.Chrome(ChromeDriverManager().install())
+        browser.get("https://share.streamlit.io/siddheshm14/product_recommendation/main/relevantsearch.py")
+
     else:
         talk('Can you please repeat.I did not understand what you say')
         #command = str(input('Command: '))
@@ -195,11 +210,16 @@ def weather_details(city):
 
 
 
-while 1:
-    command=run_alexa()
-    if 'bye' in command:
-        talk('Thank you Good Bye')
-        break
+#while 1:
+    #command=run_alexa()
+    #if 'bye' in command:
+        #talk('Thank you Good Bye')
+        #break
 
 
-
+if __name__=='__main__':
+    while 1:
+        command=run_alexa()
+        if 'bye' in command:
+            talk('Thank you Good Bye')
+            break
